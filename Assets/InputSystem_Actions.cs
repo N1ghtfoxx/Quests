@@ -1165,6 +1165,54 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Q03"",
+            ""id"": ""57c20144-f5b3-4a92-a38a-5c46ed3c924f"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""e27037b4-f295-42b6-b331-15fcc8a9467d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PointerPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""c3a48c69-c5a8-4d3e-ac9f-69f389f2fdd0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a88c5e40-ca1e-47da-aa62-8d6e11309315"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90387e3c-5b26-4f75-9dd1-94bbc5d7e4e6"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PointerPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1259,6 +1307,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Q01_Reset = m_Q01.FindAction("Reset", throwIfNotFound: true);
         m_Q01_GrowX = m_Q01.FindAction("GrowX", throwIfNotFound: true);
         m_Q01_GrowZ = m_Q01.FindAction("GrowZ", throwIfNotFound: true);
+        // Q03
+        m_Q03 = asset.FindActionMap("Q03", throwIfNotFound: true);
+        m_Q03_Click = m_Q03.FindAction("Click", throwIfNotFound: true);
+        m_Q03_PointerPosition = m_Q03.FindAction("PointerPosition", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1266,6 +1318,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Q01.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Q01.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Q03.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Q03.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1845,6 +1898,113 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="Q01Actions" /> instance referencing this action map.
     /// </summary>
     public Q01Actions @Q01 => new Q01Actions(this);
+
+    // Q03
+    private readonly InputActionMap m_Q03;
+    private List<IQ03Actions> m_Q03ActionsCallbackInterfaces = new List<IQ03Actions>();
+    private readonly InputAction m_Q03_Click;
+    private readonly InputAction m_Q03_PointerPosition;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Q03".
+    /// </summary>
+    public struct Q03Actions
+    {
+        private @InputSystem_Actions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public Q03Actions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Q03/Click".
+        /// </summary>
+        public InputAction @Click => m_Wrapper.m_Q03_Click;
+        /// <summary>
+        /// Provides access to the underlying input action "Q03/PointerPosition".
+        /// </summary>
+        public InputAction @PointerPosition => m_Wrapper.m_Q03_PointerPosition;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Q03; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="Q03Actions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(Q03Actions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="Q03Actions" />
+        public void AddCallbacks(IQ03Actions instance)
+        {
+            if (instance == null || m_Wrapper.m_Q03ActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Q03ActionsCallbackInterfaces.Add(instance);
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+            @PointerPosition.started += instance.OnPointerPosition;
+            @PointerPosition.performed += instance.OnPointerPosition;
+            @PointerPosition.canceled += instance.OnPointerPosition;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="Q03Actions" />
+        private void UnregisterCallbacks(IQ03Actions instance)
+        {
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+            @PointerPosition.started -= instance.OnPointerPosition;
+            @PointerPosition.performed -= instance.OnPointerPosition;
+            @PointerPosition.canceled -= instance.OnPointerPosition;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Q03Actions.UnregisterCallbacks(IQ03Actions)" />.
+        /// </summary>
+        /// <seealso cref="Q03Actions.UnregisterCallbacks(IQ03Actions)" />
+        public void RemoveCallbacks(IQ03Actions instance)
+        {
+            if (m_Wrapper.m_Q03ActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="Q03Actions.AddCallbacks(IQ03Actions)" />
+        /// <seealso cref="Q03Actions.RemoveCallbacks(IQ03Actions)" />
+        /// <seealso cref="Q03Actions.UnregisterCallbacks(IQ03Actions)" />
+        public void SetCallbacks(IQ03Actions instance)
+        {
+            foreach (var item in m_Wrapper.m_Q03ActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_Q03ActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="Q03Actions" /> instance referencing this action map.
+    /// </summary>
+    public Q03Actions @Q03 => new Q03Actions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2094,5 +2254,27 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGrowZ(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Q03" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="Q03Actions.AddCallbacks(IQ03Actions)" />
+    /// <seealso cref="Q03Actions.RemoveCallbacks(IQ03Actions)" />
+    public interface IQ03Actions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Click" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PointerPosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPointerPosition(InputAction.CallbackContext context);
     }
 }

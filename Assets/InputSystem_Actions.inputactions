@@ -1079,6 +1079,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Q03",
+            "id": "57c20144-f5b3-4a92-a38a-5c46ed3c924f",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "e27037b4-f295-42b6-b331-15fcc8a9467d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "c3a48c69-c5a8-4d3e-ac9f-69f389f2fdd0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a88c5e40-ca1e-47da-aa62-8d6e11309315",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90387e3c-5b26-4f75-9dd1-94bbc5d7e4e6",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
