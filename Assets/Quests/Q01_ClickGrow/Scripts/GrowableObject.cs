@@ -11,8 +11,15 @@ public class GrowableObject : MonoBehaviour, IGrowable
     /// </summary>
     public void Grow(float amount)
     {
-        if (hasReachedMaxSize) return;
+        if (hasReachedMaxSize)
+        {
+            Debug.Log("Object has already reached maximum size.");
+            return;
+        }
+
         transform.localScale += Vector3.one * amount;
+        Debug.Log("Object grew.");
+
         if (transform.localScale.x >= maxSize)
         {
             transform.localScale = Vector3.one * maxSize;
@@ -34,6 +41,7 @@ public class GrowableObject : MonoBehaviour, IGrowable
     private void OnMaxSizeReached()
     {
         Debug.Log("The object has reached its maximum size!");
+        // when max size is reached
         if (hasReachedMaxSize)
         {
             // stop further growth

@@ -63,7 +63,7 @@ public class ClickGrow : MonoBehaviour
             {
                 lastClicked = growable;
                 growable.Grow(growAmount);
-                Debug.Log("Object grew.");
+                //Debug.Log("Object grew.");
             }
             else
             {
@@ -106,6 +106,7 @@ public class ClickGrow : MonoBehaviour
 
         var go = lastClicked.GetGameObject();
         go.transform.localScale = Vector3.one;
+        lastClicked.Reset();
     }
 }
 
@@ -115,4 +116,5 @@ public interface IGrowable
     void Grow(float amount);
     Vector3 GetCurrentScale();
     GameObject GetGameObject();
+    void Reset();
 }
