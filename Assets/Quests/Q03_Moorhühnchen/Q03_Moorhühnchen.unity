@@ -313,6 +313,7 @@ MonoBehaviour:
   spawnMargin: {x: 0.1, y: 0.1}
   scoreText: {fileID: 1990765902}
   inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  targetPoolName: Targets
 --- !u!4 &825337941
 Transform:
   m_ObjectHideFlags: 0
@@ -665,6 +666,55 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1579119823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1579119825}
+  - component: {fileID: 1579119824}
+  m_Layer: 0
+  m_Name: ObjectPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1579119824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579119823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb4d340cd1beb34fa2e4a63a48500a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pools:
+  - ObjectToPool: {fileID: 357608726851053080, guid: 5b33bd3b5f36e9e408843343194694e4, type: 3}
+    PrewarmAmount: 10
+    canExpand: 1
+    Name: Targets
+--- !u!4 &1579119825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579119823}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.12568024, y: 0.047960162, z: -0.0013748549}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1990765900
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,3 +861,4 @@ SceneRoots:
   - {fileID: 825337941}
   - {fileID: 436454154}
   - {fileID: 975152795}
+  - {fileID: 1579119825}

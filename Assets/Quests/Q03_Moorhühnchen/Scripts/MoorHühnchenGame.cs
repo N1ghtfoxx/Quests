@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
-using static UnityEngine.GraphicsBuffer;
+//using System.Collections.Generic;
+//using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem;
 
 
@@ -22,6 +22,9 @@ namespace Quests.Q03
 
         [Header("Input")]
         [SerializeField] private InputActionAsset inputActions;
+
+        [Header("Object Pooling")]
+        [SerializeField] private string targetPoolName = "Targets";
 
         private int score = 0;
         private float spawnTimer = 0f;
@@ -124,12 +127,24 @@ namespace Quests.Q03
         }
 
         // This method spawns a target at a random position on the screen
-        // It instantiates the target prefab at the calculated position
-        // It logs the spawn position for debugging purposes
+        // gets object from an object pool
+        // and spawns object at random position on screen
         private void SpawnTarget()
         {
             Vector3 spawnPos = GetRandomScreenPosition();  // Get a random position within the screen bounds
-            GameObject target = Instantiate(targetPrefab, spawnPos, Quaternion.identity); // Instantiate the target prefab (Quaternion.identity means no rotation)
+
+                //GameObject target = Instantiate(targetPrefab, spawnPos, Quaternion.identity); // Instantiate the target prefab (Quaternion.identity means no rotation)
+            
+            //get object from pool instead of instantiate
+            GameObject target = ObjectPoolManager.Instance.Get(targetPoolName);
+
+            if (target == null)
+            {
+                Debug.LogWarning("No target available in pool!");
+                return;
+            }
+            target.transform.position = spawnPos;
+            target.SetActive(true);
 
             Target targetScript = target.GetComponent<Target>(); 
             if (targetScript == null)
@@ -184,7 +199,7 @@ namespace Quests.Q03
         }
 
         // This method is called when a target is hit by the player
-        // It increments the score, updates the score UI, logs the hit, and destroys the target
+        // It increments the score, updates the score UI, logs the hit, and puts the target back into an object pool instead of destroying it
         public void OnTargetHit(GameObject target)
         {
             score++;
@@ -192,15 +207,22 @@ namespace Quests.Q03
 
             Debug.Log("Target Hit! Score: " + score);
 
-            Destroy(target);
+            //Destroy(target);
+
+            // back to pool instead of destroy 
+            target.SetActive(false);
         }
 
         // This method is called when a target expires (is not hit in time)
-        // It logs the expiration and destroys the target
+        // It logs the expiration and puts the target back into an object pool instead of destroying it
         public void OnTargetExpired(GameObject target)
         {
             Debug.Log("Target expired (missed)");
-            Destroy(target);
+            //Destroy(target);
+
+            // back to pool instead of destroy 
+            target.SetActive(false);
+
         }
 
         // This method updates the score display in the UI
@@ -215,16 +237,17 @@ namespace Quests.Q03
                 Debug.Log($"Current Score: {score}");
             }
         }
-
-        // This method is called when the game object is destroyed
-        // It disables the input actions to clean up resources
-        void OnDestroy()
-        {
-            if(clickAction != null)
-                clickAction.Disable();
-            if(pointerPositionAction != null)
-                pointerPositionAction.Disable();
-        }
+        
+        // no longer needed, because object pooling is used 
+        //// This method is called when the game object is destroyed
+        //// It disables the input actions to clean up resources
+        //void OnDestroy()
+        //{
+        //    if(clickAction != null)
+        //        clickAction.Disable();
+        //    if(pointerPositionAction != null)
+        //        pointerPositionAction.Disable();
+        //}
     }
 
     // This class represents a target in the MoorHühnchen game
