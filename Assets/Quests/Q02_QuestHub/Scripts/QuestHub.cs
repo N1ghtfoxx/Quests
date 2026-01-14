@@ -46,4 +46,15 @@ public class QuestHub : MonoBehaviour
     {
                SceneManager.LoadScene("Q01_ClickGrow");
     }
+
+    public void LoadQuest3Scene()
+    {
+        SceneManager.LoadScene("Q03_Moorhühnchen");
+    }
+
+    public void LoadQuest4Scene()
+    {
+        SceneManager.LoadScene("Q04_MiniTowerdefense");
+    }
+
 }
