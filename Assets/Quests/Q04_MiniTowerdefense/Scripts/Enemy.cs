@@ -4,15 +4,30 @@ namespace Quests.Q04
 {
     public class Enemy : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        [SerializeField] private float moveSpeed = 2f;
+
+        private Transform player; 
+
         void Start()
         {
-
+            // search for game object with name "Player" 
+            GameObject playerObj = GameObject.Find("Player");
+            // if found, store its transform
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
         }
 
-        // Update is called once per frame
         void Update()
         {
+            if (player == null) return;
+
+            // direction towards player
+            Vector2 direction = (player.position - transform.position).normalized;
+
+            // movement towards player
+            transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
 
         }
     }
