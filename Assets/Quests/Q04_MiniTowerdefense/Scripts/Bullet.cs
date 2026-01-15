@@ -20,6 +20,18 @@ namespace Quests.Q04
             transform.position += (Vector3)(velocity * Time.deltaTime);
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                // destroy enemy on collision with bullet
+                Destroy(other.gameObject);
+
+                // destroy bullet as well
+                Destroy(gameObject);
+            }
+        }
+
         // destroy bullet when it goes off-screen
         private void OnBecameInvisible()
         {
