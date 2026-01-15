@@ -10,8 +10,8 @@ namespace Quests.Q04
 
         void Start()
         {
-            // search for game object with name "Player" 
-            GameObject playerObj = GameObject.Find("Player");
+            // search for game object with tag "Player" 
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             // if found, store its transform
             if (playerObj != null)
             {
@@ -28,7 +28,15 @@ namespace Quests.Q04
 
             // movement towards player
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+        }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if(other.CompareTag("Player"))
+            {
+                // destroy enemy on collision with player
+                Destroy(gameObject);
+            }
         }
     }
 }
