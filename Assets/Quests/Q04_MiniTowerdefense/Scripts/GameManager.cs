@@ -4,6 +4,8 @@ namespace Quests.Q04
 {
     public class GameManager : MonoBehaviour
     {
+        // referenz on GameOver panel in canvas
+        [SerializeField] private GameObject gameOverPanel;
 
         // Enemy prefab to spawn
         [SerializeField] private GameObject enemyPrefab;
@@ -12,22 +14,50 @@ namespace Quests.Q04
         [SerializeField] private float spawnInterval = 2f;
 
         private float spawnTimer;
+        private bool isGameOver = false; // so no enemy spawns, wenn game over
 
         // Start is called before the first frame update
         void Start()
         {
             spawnTimer = spawnInterval;
+
+            // make sure panel is off 
+            if (gameOverPanel != null)
+            {
+                gameOverPanel.SetActive(false);
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
+            // if game over, don't do stuff
+            if (isGameOver)  return; 
+
             spawnTimer -= Time.deltaTime;
             if (spawnTimer <= 0f)
             {
                 SpawnEnemy();
                 spawnTimer = spawnInterval;
             }
+        }
+
+        // this method is called by Enemy
+        public void TriggerGameOver()
+        {
+            if(isGameOver) return;
+
+            isGameOver = true;
+
+            // stopp playtime
+            Time.timeScale = 0f;
+
+            // show GameOver screen
+            if (gameOverPanel != null)
+            {
+                gameOverPanel.SetActive(true);
+            }
+            Debug.Log("Game Over!");
         }
 
         #region Enemy Spawning

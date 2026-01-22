@@ -34,6 +34,16 @@ namespace Quests.Q04
         {
             if(other.CompareTag("Player"))
             {
+                GameManager gm = FindFirstObjectByType<GameManager>();
+
+                if (gm != null)
+                {
+                    gm.TriggerGameOver();
+                }
+
+                // destroy player
+                Destroy(other.gameObject);
+
                 // destroy enemy on collision with player
                 Destroy(gameObject);
             }
